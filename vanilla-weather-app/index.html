@@ -15,24 +15,33 @@
   </head>
   <body>
     <div class="container">
-      <div class="weather-app">
-        <h1>Palm springs</h1>
-        <div class="row">
-          <div class="col-6">
-            <ul>
-              <li>Friday 10:00 AM</li>
-              <img
-                src="https://ssl.gstatic.com/onebox/weather/64/sunny.png"
-                alt="Sunny"
-              />92ºF | C
-            </ul>
-          </div>
-          <div class="col-6">
-            <ul>
-              <li>Precipitation: 0%</li>
-              <li>Humidity: 5%</li>
-              <li>Wind: 9mph</li>
-            </ul>
+      <div class="weather-wrapper">
+        <div class="weather-app">
+          <h1>Palm springs</h1>
+          <div class="row">
+            <div class="col-6">
+              <ul>
+                <li>Friday 10:00 AM</li>
+                <div class="clearfix">
+                  <img
+                    src="https://ssl.gstatic.com/onebox/weather/64/sunny.png"
+                    alt="Sunny"
+                    class="float-left"
+                  />
+                  <span class="tempNumber">
+                    <strong> 92º </strong>
+                    <span class="tempElement"> F | C </span>
+                  </span>
+                </div>
+              </ul>
+            </div>
+            <div class="col-6">
+              <ul>
+                <li>Precipitation: 0%</li>
+                <li>Humidity: 5%</li>
+                <li>Wind: 9mph</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
