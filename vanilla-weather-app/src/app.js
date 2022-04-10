@@ -34,10 +34,16 @@ function displayTemperature(response) {
   humidity.innerHTML = response.data.main.humidity;
   let dateElement = document.querySelector("#dateElement");
   dateElement.innerHTML = displayDate(response.data.dt * 1000);
+  let iconDisplay = document.querySelector("#icon");
+  iconDisplay.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  iconDisplay.setAttribute("alt", response.data.weather[0].description);
 }
 
 let apiKey = "5723740d8d0f3d5046687fbab7668982";
-let city = "Aberdeen";
+let city = "Denver";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
 axios.get(apiUrl).then(displayTemperature);
