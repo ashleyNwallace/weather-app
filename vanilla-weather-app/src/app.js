@@ -21,6 +21,14 @@ function displayDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[day];
+}
+
 function getForecast(coordinates) {
   let apiKey = "5723740d8d0f3d5046687fbab7668982";
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
@@ -64,26 +72,36 @@ function celsiusTemp(event) {
 }
 
 function displayForecast(response) {
+  let predictedForecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
 
-  let days = ["Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   forecastHTML = `<div class="row">`;
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col-2">
-                  <div class="weather-forecast-day">${day}</div>
+  predictedForecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="col-2">
+                  <div class="weather-forecast-day">${formatDay(
+                    forecastDay.dt
+                  )}</div>
                   <img
-                    src="http://openweathermap.org/img/wn/02d@2x.png"
+                    src="http://openweathermap.org/img/wn/${
+                      forecastDay.weather[0].icon
+                    }@2x.png"
                     alt=""
                     width="100%"
                     class="weather-forecast-img"
                   />
                   <div class="weather-forecast-temperature">
-                    <span class="weather-forecast-min">10º</span>
-                    <span class="weather-forecast-max">60º </span>
+                    <span class="weather-forecast-min">${Math.round(
+                      forecastDay.temp.min
+                    )}º</span>
+                    <span class="weather-forecast-max">${Math.round(
+                      forecastDay.temp.max
+                    )}º </span>
                   </div>
                 </div> `;
+    }
   });
 
   forecastHTML = forecastHTML + `</div>;`;
