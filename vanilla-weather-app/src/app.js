@@ -24,8 +24,9 @@ function displayDate(timestamp) {
 function displayTemperature(response) {
   let cityElement = document.querySelector("#city");
   cityElement.innerHTML = response.data.name;
+  tempC = Math.round(response.data.main.temp);
   let temperatureElement = document.querySelector("#currentTemp");
-  temperatureElement.innerHTML = Math.round(response.data.main.temp);
+  temperatureElement.innerHTML = tempC;
   let weatherDescription = document.querySelector("#weatherDescription");
   weatherDescription.innerHTML = response.data.weather[0].description;
   let windSpeed = document.querySelector("#windSpeed");
@@ -42,6 +43,18 @@ function displayTemperature(response) {
   iconDisplay.setAttribute("alt", response.data.weather[0].description);
 }
 
+function farenheitTemp(event) {
+  event.preventDefault();
+  document.querySelector("#currentTemp").innerHTML = Math.round(
+    (tempC * 9) / 5 + 32
+  );
+}
+
+function celsiusTemp(event) {
+  event.preventDefault();
+  document.querySelector("#currentTemp").innerHTML = tempC;
+}
+
 function search(city) {
   let apiKey = "5723740d8d0f3d5046687fbab7668982";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
@@ -54,7 +67,13 @@ function handleSubmit(event) {
   search(cityElement.value);
 }
 
+let tempC = null;
+document
+  .querySelector("#farenheitTemp")
+  .addEventListener("click", farenheitTemp);
+document.querySelector("#celsiusTemp").addEventListener("click", celsiusTemp);
+
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
 
-search("Denver");
+search("Madrid");
