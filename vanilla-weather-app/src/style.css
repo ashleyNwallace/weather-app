@@ -1,3 +1,7 @@
+body {
+  background-color: #a5a58d;
+}
+
 h1 {
   color: #bdc1c6;
   font-size: 30px;
@@ -26,6 +30,7 @@ li {
 }
 
 .weather-wrapper {
+  background-color: #fff;
   max-width: 600px;
   margin: 30px auto;
   font-family: arial;
@@ -72,4 +77,12 @@ li {
 .weather-forecast-max {
   margin-left: 2px;
   color: black;
+}
+
+#source-code {
+  margin: 0;
+  position: absolute;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
 }

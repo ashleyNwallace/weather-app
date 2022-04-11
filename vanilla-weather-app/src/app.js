@@ -113,4 +113,4 @@ let tempC = null;
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
 
-search("Madrid");
+search("Denver");
